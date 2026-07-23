@@ -4,7 +4,8 @@
 
 write:
 
-MOVI a2, 0x3FF40000
+MOVI a2, 0x60000000
+
 
 MOVI a3, 'A'
 
