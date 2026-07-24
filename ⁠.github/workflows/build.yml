@@ -1,4 +1,4 @@
-Name: Build Xtensa Assembly
+name: Build Xtensa Assembly
 
 on: [push, pull_request]
 
@@ -24,4 +24,3 @@ jobs:
             xtensa-esp32-elf-gcc -c start.S -o start.o
             xtensa-esp32-elf-ld start.o -o start.elf
             esptool.py --chip esp32 elf2image start.elf -o start.bin
-
