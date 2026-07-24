@@ -1,16 +1,36 @@
 .global _start
+.section .iram0.text
+.align 4
 
-.text
+_start:
+    MOVI    a4, 0x3FF4808C
+    MOVI    a5, 0
+    s32i    a5, a4, 0
 
 _start:
 
 MOVI a2, 0x60000000
 
+    MOVI    a4, 0x3FF5F064
+    MOVI    a5, 0x50D83AA1
+    s32i    a5, a4, 0
 
-MOVI a3, 'A'
+    MOVI    a4, 0x3FF5F048
+    MOVI    a5, 0
+    s32i    a5, a4, 0
 
-s8i a3, a2, 0
+    MOVI    a2, 0x3FF40000   
+    MOVI    a3, 0x41        # fuck
 
-loop:
+print_loop:
+    # Envia 'A'
+    s32i    a3, a2, 0
 
-J loop
+    MOVI    a6, 2000000
+delay:
+    addi    a6, a6, -1
+    bnez    a6, delay
+
+    j       print_loop
+
+    .literal_position
