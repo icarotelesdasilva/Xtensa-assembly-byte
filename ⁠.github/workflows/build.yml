@@ -1,4 +1,4 @@
-name: Build Xtensa Assembly
+Name: Build Xtensa Assembly
 
 on: [push, pull_request]
 
@@ -22,5 +22,6 @@ jobs:
           esp_idf_version: 'v5.1'
           command: |
             xtensa-esp32-elf-gcc -c start.S -o start.o
-            xtensa-esp32-elf-ld write.o -o start.elf
+            xtensa-esp32-elf-ld start.o -o start.elf
             esptool.py --chip esp32 elf2image start.elf -o kernel.bin
+
