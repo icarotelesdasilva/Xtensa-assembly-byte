@@ -1,0 +1,30 @@
+name: Kernel Xtensa CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo do repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Esptool
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install esptool
+
+      - name: Instalar Toolchain e Compilar
+        uses: espressif/git-action-esp-idf@v1
+        with:
+          esp-idf-version: 'v5.1'
+          run: |
+            xtensa-esp32-elf-gcc -c start.S -o start.o
+            xtensa-esp32-elf-ld start.o -o start.elf
+            esptool.py --chip esp32 elf2image start.elf -o start.bin
