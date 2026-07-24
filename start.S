@@ -1,8 +1,8 @@
-.global write
+.global _start
 
 .text
 
-write:
+_start:
 
 MOVI a2, 0x60000000
 
