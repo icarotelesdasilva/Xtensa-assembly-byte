@@ -7,14 +7,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name:  download 
+      - name: Baixar codigo do repositorio
         uses: actions/checkout@v4
 
-      - name:  Toolchain Xtensa (ESP32)
+      - name: Instalar Python e Esptool
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install esptool
+
+      - name: Instalar Toolchain Xtensa (ESP32)
         uses: espressif/git-action-esp-idf@v1
         with:
           esp-idf-version: 'v5.1'
 
-      - name:  Make
+      - name: Executar o Make
         run: |
           make
