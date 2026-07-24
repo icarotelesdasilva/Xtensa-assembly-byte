@@ -1,0 +1,20 @@
+name: Build Xtensa Assembly
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name:  download 
+        uses: actions/checkout@v4
+
+      - name:  Toolchain Xtensa (ESP32)
+        uses: espressif/git-action-esp-idf@v1
+        with:
+          esp-idf-version: 'v5.1'
+
+      - name:  Make
+        run: |
+          make
